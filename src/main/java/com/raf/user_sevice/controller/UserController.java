@@ -1,6 +1,7 @@
 package com.raf.user_sevice.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.raf.user_sevice.dto.ClientCreateDto;
 import com.raf.user_sevice.dto.ClientEditDto;
 import com.raf.user_sevice.dto.DiscountDto;
@@ -43,37 +44,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ApiOperation(value = "Get all users")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "What page number you want", dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "size", value = "Number of items to return", dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
-                    value = "Sorting criteria in the format: property(,asc|desc). " +
-                            "Default sort order is ascending. " +
-                            "Multiple sort criteria are supported.")})
-    @GetMapping
-    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_USER"})
-    public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("Authorization") String authorization,
-                                                     Pageable pageable) {
 
-        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "Register user")
-    @PostMapping
-    public ResponseEntity<UserDto> saveUser(@RequestBody @Valid UserCreateDto userCreateDto) {
-        return new ResponseEntity<>(userService.add(userCreateDto), HttpStatus.CREATED);
-    }
     
     @ApiOperation(value = "Register client")
     @PostMapping("/client")
-    public ResponseEntity<UserDto> saveClient(@RequestBody @Valid ClientCreateDto userCreateDto) {
+    public ResponseEntity<UserDto> saveClient(@RequestBody @Valid ClientCreateDto userCreateDto) throws JsonProcessingException {
         return new ResponseEntity<>(userService.addClient(userCreateDto), HttpStatus.CREATED);
     }
     
     @ApiOperation(value = "Register manager")
     @PostMapping("/manager")
-    public ResponseEntity<UserDto> saveManager(@RequestBody @Valid ManagerCreateDto userCreateDto) {
+    public ResponseEntity<UserDto> saveManager(@RequestBody @Valid ManagerCreateDto userCreateDto) throws JsonProcessingException {
         return new ResponseEntity<>(userService.addManager(userCreateDto), HttpStatus.CREATED);
     }
 
@@ -90,25 +71,20 @@ public class UserController {
 
         return new ResponseEntity<>(userService.changeAccessToUser(userForbidDto), HttpStatus.OK);
     }
-    
-    @PutMapping("/edit")
-    public ResponseEntity<UserDto> editProfile(@RequestParam("Current username") String username, @RequestParam("Current password") String password, UserEditDto userEditDto) {
 
-        return new ResponseEntity<>(userService.editProfile(username,password, userEditDto), HttpStatus.OK);
-    }
     
     @ApiOperation(value = "Edit profile")
-    @PutMapping("/editClient")
+    @PutMapping("/client")
     @CheckSecurity(roles = {"ROLE_CLIENT"})
-    public ResponseEntity<UserDto> editClientProfile(@RequestHeader("Authorization") String authorization, @RequestParam("Current username") String username, @RequestParam("Current password") String password, ClientEditDto userEditDto) {
+    public ResponseEntity<UserDto> editClientProfile(@RequestHeader("Authorization") String authorization, @RequestParam("Current username") String username, @RequestParam("Current password") String password, ClientEditDto userEditDto) throws JsonProcessingException {
 
         return new ResponseEntity<>(userService.editClientProfile(username,password, userEditDto), HttpStatus.OK);
     }
     
     @ApiOperation(value = "Edit profile")
-    @PutMapping("/editManager")
+    @PutMapping("/manager")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<UserDto> editManagerProfile(@RequestHeader("Authorization") String authorization, @RequestParam("Current username") String username, @RequestParam("Current password") String password, ManagerEditDto userEditDto) {
+    public ResponseEntity<UserDto> editManagerProfile(@RequestHeader("Authorization") String authorization, @RequestParam("Current username") String username, @RequestParam("Current password") String password, ManagerEditDto userEditDto) throws JsonProcessingException {
 
         return new ResponseEntity<>(userService.editManagerProfile(username,password, userEditDto), HttpStatus.OK);
     }
@@ -117,5 +93,38 @@ public class UserController {
     public ResponseEntity<DiscountDto> getDiscount(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.findDiscount(id), HttpStatus.OK);
     }
-   
+
+   /* @GetMapping("/poruka")
+    public String poruka() {
+        return "EUREKA RADI";
+    }*/
+
+
+    /* @ApiOperation(value = "Get all users")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "What page number you want", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "Number of items to return", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+                    value = "Sorting criteria in the format: property(,asc|desc). " +
+                            "Default sort order is ascending. " +
+                            "Multiple sort criteria are supported.")})
+    @GetMapping
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_USER"})
+    public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("Authorization") String authorization,
+                                                     Pageable pageable) {
+
+        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
+    }*/
+
+    /*@ApiOperation(value = "Register user")
+    @PostMapping
+    public ResponseEntity<UserDto> saveUser(@RequestBody @Valid UserCreateDto userCreateDto) {
+        return new ResponseEntity<>(userService.add(userCreateDto), HttpStatus.CREATED);
+    }*/
+
+    /*@PutMapping("/edit")
+    public ResponseEntity<UserDto> editProfile(@RequestParam("Current username") String username, @RequestParam("Current password") String password, UserEditDto userEditDto) {
+
+        return new ResponseEntity<>(userService.editProfile(username,password, userEditDto), HttpStatus.OK);
+    }*/
 }

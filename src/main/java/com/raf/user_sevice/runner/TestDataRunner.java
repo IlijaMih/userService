@@ -1,11 +1,9 @@
 package com.raf.user_sevice.runner;
 
-import com.raf.user_sevice.domain.Client;
-import com.raf.user_sevice.domain.Manager;
-import com.raf.user_sevice.domain.Role;
-import com.raf.user_sevice.domain.User;
+import com.raf.user_sevice.domain.*;
 import com.raf.user_sevice.repository.RoleRepository;
 import com.raf.user_sevice.repository.UserRepository;
+import com.raf.user_sevice.service.impl.UserServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -50,6 +48,7 @@ public class TestDataRunner implements CommandLineRunner {
         client.setEmail("client@gmail.com");
         client.setForbiddenAccess(false);
         client.setNumberOfReservations(0);
+        client.setRank(UserServiceImpl.bronze);
         client.setPassportNumber("1122");
         client.setRole(roleClient);
         userRepository.save(client);

@@ -9,6 +9,8 @@ import com.raf.user_sevice.dto.ManagerCreateDto;
 import com.raf.user_sevice.dto.UserCreateDto;
 import com.raf.user_sevice.dto.UserDto;
 import com.raf.user_sevice.repository.RoleRepository;
+import com.raf.user_sevice.service.impl.UserService;
+import com.raf.user_sevice.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -27,6 +29,8 @@ public class UserMapper {
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setUsername(user.getUsername());
+        userDto.setBirthDate(user.getBirthDate());
+        userDto.setPhoneNumber(user.getPhoneNumber());
         return userDto;
     }
 
@@ -54,7 +58,10 @@ public class UserMapper {
     	client.setRole(roleRepository.findRoleByName("ROLE_CLIENT").get());
     	client.setPassportNumber(userCreateDto.getPassportNumber());
     	client.setNumberOfReservations(0);
+        client.setRank(UserServiceImpl.bronze);
     	client.setForbiddenAccess(false);
+        client.setPhoneNumber(userCreateDto.getPhoneNumber());
+        client.setBirthDate(userCreateDto.getBirthDate());
         User user = client;
         return user;
     }
@@ -70,6 +77,8 @@ public class UserMapper {
     	manager.setHotelName(userCreateDto.getHotelName());
     	manager.setDateOfEmployment(userCreateDto.getDateOfEmployment());
     	manager.setForbiddenAccess(false);
+        manager.setPhoneNumber(userCreateDto.getPhoneNumber());
+        manager.setBirthDate(userCreateDto.getBirthDate());
         User user = manager;
         return user;
     }

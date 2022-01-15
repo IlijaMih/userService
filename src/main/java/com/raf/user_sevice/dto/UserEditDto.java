@@ -5,6 +5,8 @@ public class UserEditDto {
 	private String username;
 	private String password;
 	private String email;
+	private String phoneNumber;
+	private String birthDate;
     private String firstName;
     private String lastName;
     
@@ -38,8 +40,20 @@ public class UserEditDto {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	
-	
-	
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
 }

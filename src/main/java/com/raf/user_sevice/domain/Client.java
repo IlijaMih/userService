@@ -15,6 +15,7 @@ public class Client extends User{
 
 	private String passportNumber;
     private Integer numberOfReservations;
+    private String rank;
 
     public String getPassportNumber() {
         return passportNumber;
@@ -30,5 +31,13 @@ public class Client extends User{
 
     public void setNumberOfReservations(Integer numberOfReservations) {
         this.numberOfReservations = numberOfReservations;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 }

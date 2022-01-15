@@ -1,5 +1,6 @@
 package com.raf.user_sevice.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.raf.user_sevice.dto.ClientCreateDto;
 import com.raf.user_sevice.dto.ClientEditDto;
 import com.raf.user_sevice.dto.DiscountDto;
@@ -22,9 +23,9 @@ public interface UserService {
 
     UserDto add(UserCreateDto userCreateDto);
     
-    UserDto addClient(ClientCreateDto userCreateDto);
+    UserDto addClient(ClientCreateDto userCreateDto) throws JsonProcessingException;
     
-    UserDto addManager(ManagerCreateDto userCreateDto);
+    UserDto addManager(ManagerCreateDto userCreateDto) throws JsonProcessingException;
 
     TokenResponseDto login(TokenRequestDto tokenRequestDto);
     
@@ -32,11 +33,15 @@ public interface UserService {
     
     UserDto editProfile(String username, String password, UserEditDto userEditDto);
     
-    UserDto editClientProfile(String username, String password, ClientEditDto userEditDto);
+    UserDto editClientProfile(String username, String password, ClientEditDto userEditDto) throws JsonProcessingException;
     
-    UserDto editManagerProfile(String username, String password, ManagerEditDto userEditDto);
+    UserDto editManagerProfile(String username, String password, ManagerEditDto userEditDto) throws JsonProcessingException;
     
     void incrementReservationCountForUser(IncrementReservationCountDto dto);
+
+    void decrementReservationCountForUser(IncrementReservationCountDto dto);
     
     DiscountDto findDiscount(Long id);
+
+
 }

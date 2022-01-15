@@ -18,6 +18,8 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
+    private String phoneNumber;
+    private String birthDate;
     private String username;
     private String password;
     private boolean forbiddenAccess;
@@ -87,5 +89,22 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
 
 }

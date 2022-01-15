@@ -18,6 +18,8 @@ public class UserCreateDto {
     private String username;
     @Length(min = 8, max = 20)
     private String password;
+    private String phoneNumber;
+    private String birthDate;
     private boolean forbiddenAccess;
 
     public String getEmail() {
@@ -68,4 +70,19 @@ public class UserCreateDto {
 		this.forbiddenAccess = forbiddenAccess;
 	}
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
 }
